@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventario</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/tablas.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+<body>
+    <div class="sidebar">
+        <br>
+            <!-- Logo en forma circular -->
+            <div class="logo-container">
+                <img src="{% static 'img/logo_acortado.png' %}" alt="Logo de la Empresa" class="logo">
+                <p class="role">{{ user.nombre }} </p>
+            </div>
+        <br>
+        <div class="menu-container">
+            <!-- Enlaces del menú -->
+            <a href="{% url 'admin_dashboard' %}"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+            <a href="{% url 'ventas' %}"><i class="fas fa-boxes"></i> Ventas</a>
+            <a href="{% url 'usuarios' %}"><i class="fas fa-users"></i> Usuarios</a>
+            <a href="{% url 'productos' %}"><i class="fas fa-cube"></i> Productos</a>
+            <a href="{% url 'clientes' %}" class="no-hover"><i class="fas fa-user-tie"></i> Clientes</a>
+            <a href="{% url 'proveedores' %}"><i class="fas fa-truck"></i> Proveedores</a>
+            <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+        </div>
+    </div>
+    <div class="content">
+        <div class="container">
+            <div class="header">
+                <h1>Detalles del Usuario: {{ usuario.nombre }}</h1>
+                
+
+                {% if usuario.foto %}
+                <div class="user-photo">
+                    <img src="{{ usuario.foto.url }}" alt="Foto de {{ usuario.nombre }}" class="img-fluid">
+                </div>
+                {% else %}
+                    <p>No hay foto disponible</p>
+                    <p>{{ usuario.foto }}</p>
+                {% endif %}
+            </div>
+
+            <a href="{% url 'usuarios'%}" class="back-icon"><i class="fas fa-arrow-left"></i></a>
+            <br><br>
+            <div class="user-details">
+                <p><strong>DNI:</strong> {{ usuario.dni}}</p>
+                <p><strong>Apellidos:</strong> {{ usuario.apellidos }}</p>
+                <p><strong>Correo:</strong> {{ usuario.correo }}</p>
+                <p><strong>Telefono:</strong> {{ usuario.telefono }}</p>
+                <p><strong>Cargo:</strong> {{ usuario.cargo }}</p>
+                <p><strong>Area:</strong> {{ usuario.area }}</p>
+                <p><strong>Edad:</strong> {{ usuario.edad}}</p>
+                <p><strong>Rol:</strong> 
+                    {% if usuario.groups.all %}
+                        {% for grupo in usuario.groups.all %}
+                            {{ grupo.name }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        Sin grupo asignado
+                    {% endif %}
+                </p>
+            </div>
+
+            <br><br>
+            <div class="register-container">
+                <a href="{% url 'actualizar_usuario' usuario.dni %}">
+                    <button type="submit" class="register-button"><i class="fas fa-sync-alt"></i> Actualizar</button>
+                </a>
+            </div>

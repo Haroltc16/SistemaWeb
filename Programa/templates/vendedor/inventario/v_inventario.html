@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventario</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/tablas.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+    <div class="sidebar">
+        <br>
+            <!-- Logo en forma circular -->
+            <div class="logo-container">
+                <img src="{% static 'img/logo_acortado.png' %}" alt="Logo de la Empresa" class="logo">
+                <p class="role">{{ user.nombre }} </p>
+            </div>
+        <br>
+        <div class="menu-container">
+            <!-- Enlaces del menú -->
+            <a href="{% url 'admin_dashboard' %}"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+            <a href="{% url 'ventas' %}"><i class="fas fa-boxes"></i> Ventas</a>
+            <a href="{% url 'usuarios' %}"><i class="fas fa-users"></i> Usuarios</a>
+            <a href="{% url 'productos' %}"><i class="fas fa-cube"></i> Productos</a>
+            <a href="{% url 'clientes' %}" class="no-hover"><i class="fas fa-user-tie"></i> Clientes</a>
+            <a href="{% url 'proveedores' %}"><i class="fas fa-truck"></i> Proveedores</a>
+            <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+        </div> 
+    </div>
+
+    <div class="content">
+        <h1>Gráfico de Ventas Diarias</h1>
+        <canvas id="ventasChart" class="grafico" width="400" height="200"></canvas>
+
+    
+
+    <script>
+        // Configura el gráfico utilizando los datos pasados desde Django
+        const ctx = document.getElementById('ventasChart').getContext('2d');
+        const ventasChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: {{ fechas|safe }},
+                datasets: [{
+                    label: 'Ventas Diarias',
+                    data: {{ montos|safe }},
+                    backgroundColor: 'rgba(0, 123, 255, 0.2)',
+                    borderColor: 'rgba(0, 123, 255, 1)',
+                    borderWidth: 2,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Fecha'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Monto de Ventas'
+                        },
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/tablas.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+<body>
+    <div class="sidebar">
+        <br>
+            <!-- Logo en forma circular -->
+            <div class="logo-container">
+                <img src="{% static 'img/logo_acortado.png' %}" alt="Logo de la Empresa" class="logo">
+                <p class="role">{{ user.nombre }} </p>
+            </div>
+        <br>
+        <div class="menu-container">
+            <!-- Enlaces del menú -->
+            <a href="{% url 'admin_dashboard' %}"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+            <a href="{% url 'ventas' %}"><i class="fas fa-boxes"></i> Ventas</a>
+            <a href="{% url 'usuarios' %}"><i class="fas fa-users"></i> Usuarios</a>
+            <a href="{% url 'productos' %}"><i class="fas fa-cube"></i> Productos</a>
+            <a href="{% url 'clientes' %}" class="no-hover"><i class="fas fa-user-tie"></i> Clientes</a>
+            <a href="{% url 'proveedores' %}"><i class="fas fa-truck"></i> Proveedores</a>
+            <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+        </div> 
+    </div>
+
+    <div class="content-form">
+        <h1>Actualizar Producto - Serie: {{ producto.serie }}</h1>
+        <a href="{% url 'productos' %}" class="back-icon"><i class="fas fa-arrow-left"></i></a>
+
+        <form method="post" class="formulario_actualizar">
+            {% csrf_token %}
+            <label for="nombre" class="nombres">Nombre:</label>
+            <input type="text" class="entradas" name="nombre" value="{{ producto.nombre }}" required>
+
+            <label for="descripcion" class="nombres">Descripción:</label>
+            <textarea  class="entradas" name="descripcion">{{ producto.descripcion }}</textarea>
+
+            <label for="precio" class="nombres">Precio:</label>
+            <input type="number"  class="entradas" name="precio" value="{{ producto.precio }}" required>
+
+            <label for="stock" class="nombres">Stock:</label>
+            <input type="number"  class="entradas" name="stock" value="{{ producto.stock }}" required>
+
+            <label for="categoria" class="nombres">Categoría:</label>
+            <select class="entradas" name="categoria" required>
+                {% for categoria in categorias %}
+                <option value="{{ categoria.categoria_id }}" {% if categoria == producto.categoria %}selected{% endif %}>
+                    {{ categoria.nombre }}
+                </option>
+                {% endfor %}
+            </select>
+
+            <label for="proveedor" class="nombres">Proveedor:</label>
+            <select class="entradas" name="proveedor" required>
+                {% for proveedor in proveedores %}
+                <option value="{{ proveedor.ruc }}" {% if proveedor == producto.proveedor %}selected{% endif %}>
+                    {{ proveedor.nombre }}
+                </option>
+                {% endfor %}
+            </select>
+
+            <br><br>
+            <button type="submit" class="register-button"><i class="fas fa-sync-alt"></i> Actualizar</button>
+        </form>
+
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clientes</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/tablas.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+
+    <!-- Importación de librería de iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+</head>
+<body>
+    <div class="sidebar">
+        <br>
+            <!-- Logo en forma circular -->
+            <div class="logo-container">
+                <img src="{% static 'img/logo_acortado.png' %}" alt="Logo de la Empresa" class="logo">
+                <p class="role">{{ user.nombre }} </p>
+            </div>
+        <br>
+        <div class="menu-container">
+            <!-- Enlaces del menú -->
+            <a href="{% url 'admin_dashboard' %}"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+            <a href="{% url 'ventas' %}"><i class="fas fa-boxes"></i> Ventas</a>
+            <a href="{% url 'usuarios' %}"><i class="fas fa-users"></i> Usuarios</a>
+            <a href="{% url 'productos' %}"><i class="fas fa-cube"></i> Productos</a>
+            <a href="{% url 'clientes' %}" class="no-hover"><i class="fas fa-user-tie"></i> Clientes</a>
+            <a href="{% url 'proveedores' %}"><i class="fas fa-truck"></i> Proveedores</a>
+            <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+        </div> 
+    </div>
+
+        <div class="content">
+
+            <h1>Lista de Clientes</h1>
+
+            <!-- Formulario de búsqueda -->
+            <div class="search-container">
+                <form method="GET" action="{% url 'clientes' %}">
+                    <input type="text" name="q" class="search-box" placeholder="Buscar por nombre" value="{{ query|default:'' }}">
+                    <button type="submit" class="search-button">
+                        <i class="fas fa-search"></i> <!-- Icono de lupa -->
+                    </button>
+                </form>
+            </div>
+
+            <!-- Tabla de clientes -->
+            <div class="table-container">
+                <table class="client-table">
+                        <thead>
+                            <tr>
+                                <th>DNI</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Dirección</th>
+                                <th>Teléfono</th>
+                                <th>Correo</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for cliente in clientes %}
+                            <tr>
+                                <td>{{ cliente.dni }}</td>
+                                <td>{{ cliente.nombre }}</td>
+                                <td>{{ cliente.apellido }}</td>
+                                <td>{{ cliente.direccion }}</td>
+                                <td>{{ cliente.telefono }}</td>
+                                <td>{{ cliente.correo }}</td>
+                                <td>
+                                    <a href="{% url 'actualizar_cliente' cliente.dni %}" class="icon-button update">
+                                        <i class="fas fa-edit"></i>
+                                    </a> 
+                                    <a href="{% url 'eliminar_cliente' cliente.dni %}" class="icon-button delete" onclick="return confirm('¿Estás seguro de que deseas eliminar este cliente?');">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="7">No hay clientes registrados.</td>
+                            </tr>
+                            {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <!-- Botón para registrar nuevo cliente -->
+            <div class="register-container">
+                <a href="{% url 'registrar_cliente' %}">
+                    <button type="submit" class="register-button"><i class="fas fa-user-plus"></i> Registrar Nuevo</button>
+                </a>
+            </div>
+        </div>  
+</body>
+</html>

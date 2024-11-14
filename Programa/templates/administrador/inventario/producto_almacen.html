@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventario</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/tablas.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+</head>
+
+<body>
+    <div class="sidebar">
+        <br>
+            <!-- Logo en forma circular -->
+            <div class="logo-container">
+                <img src="{% static 'img/logo_acortado.png' %}" alt="Logo de la Empresa" class="logo">
+                <p class="role">{{ user.nombre }} </p>
+            </div>
+        <br>
+        <div class="menu-container">
+            <!-- Enlaces del menú -->
+            <a href="{% url 'admin_dashboard' %}"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+            <a href="{% url 'ventas' %}"><i class="fas fa-boxes"></i> Ventas</a>
+            <a href="{% url 'usuarios' %}"><i class="fas fa-users"></i> Usuarios</a>
+            <a href="{% url 'productos' %}"><i class="fas fa-cube"></i> Productos</a>
+            <a href="{% url 'clientes' %}" class="no-hover"><i class="fas fa-user-tie"></i> Clientes</a>
+            <a href="{% url 'proveedores' %}"><i class="fas fa-truck"></i> Proveedores</a>
+            <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+        </div>  
+    </div>
+
+    <div class="content-form">
+        <h1>Registrar Inventario</h1>
+        <a href="{% url 'productos' %}" class="back-icon"><i class="fas fa-arrow-left"></i></a>
+
+        <form method="POST" class="formulario_actualizar">
+            {% csrf_token %}
+            
+            <!-- Selección de Producto -->
+            <div class="form-group">
+                <label for="producto_serie" class="nombres">Serie del Producto:</label>
+                <input type="text" id="producto_serie" class="entradas" name="producto_serie" required readonly>
+
+                <label for="producto_nombre" class="nombres">Nombre del Producto:</label>
+                <input type="text" id="producto_nombre" class="entradas" name="producto_nombre"  required readonly>
+                
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalProductos">
+                    <i class="fas fa-search"></i> <!-- Icono de lupa -->
+                </button>
+            </div>
+
+            <!-- Selección de Almacén -->
+            <div class="form-group">
+                <label for="almacen_id" class="nombres">ID de Almacén:</label>
+                <input type="text" id="almacen_id" name="almacen_id" class="entradas"  required readonly>
+
+                <label for="almacen_nombre" class="nombres">Nombre del Almacén:</label>
+                <input type="text" id="almacen_nombre" name="almacen_nombre" class="entradas" required readonly>
+                
+                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modalAlmacenes">
+                    <i class="fas fa-search"></i> <!-- Icono de lupa -->
+                </button>
+            </div>
+
+            <div class="form-group">
+                <label for="cantidad" class="nombres">Cantidad:</label>
+                <input type="number" id="cantidad" name="cantidad" class="entradas" required>
+            </div>
+
+            <button type="submit" class="register-button"><i class="fas fa-file-alt"></i> Registrar</button>
+        </form>
+
+        <!-- Modal Productos -->
+        <div class="modal fade" id="modalProductos" tabindex="-1" role="dialog" aria-labelledby="modalProductosLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalProductosLabel">Productos Disponibles</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Serie</th>
+                                    <th>Nombre</th>
+                                    <th>Descripción</th>
+                                    <th>Precio</th>
+                                    <th>Stock</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for producto in productos %}
+                                <tr class="producto-fila" data-serie="{{ producto.serie }}" data-nombre="{{ producto.nombre }}">
+                                    <td>{{ producto.serie }}</td>
+                                    <td>{{ producto.nombre }}</td>
+                                    <td>{{ producto.descripcion }}</td>
+                                    <td>{{ producto.precio }}</td>
+                                    <td>{{ producto.stock }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Almacenes -->
+        <div class="modal fade" id="modalAlmacenes" tabindex="-1" role="dialog" aria-labelledby="modalAlmacenesLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalAlmacenesLabel">Almacenes Disponibles</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID Almacén</th>
+                                    <th>Nombre</th>
+                                    <th>Dirección</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for almacen in almacenes %}
+                                <tr class="almacen-fila" data-id="{{ almacen.almacen_id }}" data-nombre="{{ almacen.nombre }}">
+                                    <td>{{ almacen.almacen_id }}</td>
+                                    <td>{{ almacen.nombre }}</td>
+                                    <td>{{ almacen.direccion }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Función para capturar el clic en la serie de producto
+        document.addEventListener('DOMContentLoaded', () => {
+            const filasProductos = document.querySelectorAll('.producto-fila');
+            
+            filasProductos.forEach(fila => {
+                fila.addEventListener('click', function() {
+                    const serie = this.getAttribute('data-serie');
+                    const nombre = this.getAttribute('data-nombre');
+                    
+                    // Inserta los valores en los campos de producto
+                    document.getElementById('producto_serie').value = serie;
+                    document.getElementById('producto_nombre').value = nombre;
+
+                    $('#modalProductos').modal('hide');
+                });
+            });
+
+            const filasAlmacenes = document.querySelectorAll('.almacen-fila');
+            
+            filasAlmacenes.forEach(fila => {
+                fila.addEventListener('click', function() {
+                    const id = this.getAttribute('data-id');
+                    const nombre = this.getAttribute('data-nombre');
+                    
+                    // Inserta los valores en los campos de almacén
+                    document.getElementById('almacen_id').value = id;
+                    document.getElementById('almacen_nombre').value = nombre;
+
+                    $('#modalAlmacenes').modal('hide');
+                });
+            });
+        });
+    </script>
+
+</body>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <title>Login</title>
+</head>
+<body>
+    <div class="container" id="container">
+        <a href="{% url 'home' %}" class="back-icon">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        <div class="form-container sign-in">
+            <form method="POST" action="" class="login-form">
+                <h1>Iniciar Sesion</h1>
+                {% csrf_token %}
+                <br>
+                <span>Bienvenido a Silicon Logix</span>
+                <br>
+                <label for="dni">
+                <input type="text" placeholder="DNI" id="dni"  maxlength="8" name="username" required>
+                </label>
+                <label for="password">
+                <input type="password" placeholder="Contraseña" id="password" name="password" required>
+                </label>
+                <br>
+                <button type="submit">Iniciar sesión</button>
+
+                <!-- Mostrar error si existe -->
+                {% if error %}
+                    <p style="color: red;">{{ error }}</p>
+                {% endif %}
+            </form>
+        </div>
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="toggle-panel toggle-right">
+                    <a href="{% url 'home' %}" >
+                        <img  src="{% static 'img/Logotipo-en-blanco.webp' %}" alt="Logo de la Empresa" class="logo">
+                    </a>
+                    <p>En Silicon, transformamos desafíos en oportunidades, innovando hoy para liderar el mañana.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>

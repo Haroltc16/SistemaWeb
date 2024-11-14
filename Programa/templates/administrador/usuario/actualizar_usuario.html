@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualizar Cliente</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/registros.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <div class="sidebar">
+        <br>
+        <!-- Logo en forma circular -->
+        <div class="logo-container">
+            <img src="{% static 'img/logo_acortado.png' %}" alt="Logo de la Empresa" class="logo">
+            <p class="role">{{ user.nombre }} </p>
+        </div>
+        <br>
+        <div class="menu-container">
+            <!-- Enlaces del menú -->
+            <a href="{% url 'admin_dashboard' %}"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+            <a href="{% url 'ventas' %}"><i class="fas fa-boxes"></i> Ventas</a>
+            <a href="{% url 'usuarios' %}"><i class="fas fa-users"></i> Usuarios</a>
+            <a href="{% url 'productos' %}"><i class="fas fa-cube"></i> Productos</a>
+            <a href="{% url 'clientes' %}" class="no-hover"><i class="fas fa-user-tie"></i> Clientes</a>
+            <a href="{% url 'proveedores' %}"><i class="fas fa-truck"></i> Proveedores</a>
+            <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+        </div> 
+    </div>
+
+    <div class="content-form">
+    <h1>Actualizar Usuario - DNI: {{ usuario.dni }}</h1>
+    <a href="{% url 'usuario_detalle' usuario.dni %}" class="back-icon"><i class="fas fa-arrow-left"></i></a>
+
+        <form method="POST" class="formulario_actualizar" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="nombre" class="nombres">Nombre:</label>
+            <input type="text" id="nombre" class="entradas" name="nombre" value="{{ usuario.nombre }}" required><br>
+
+            <label for="apellidos" class="nombres">Apellido:</label>
+            <input type="text" id="apellidos" class="entradas" name="apellidos" value="{{ usuario.apellidos }}" required><br>
+
+            <label for="correo" class="nombres">Correo:</label>
+            <input type="email" id="correo" class="entradas" name="correo" value="{{ usuario.correo }}" required><br>
+
+            <label for="telefono" class="nombres">Teléfono:</label>
+            <input type="text" id="telefono" class="entradas" name="telefono" value="{{ usuario.telefono }}" required><br>
+
+            <label for="cargo" class="nombres">Cargo:</label>
+            <input type="text" id="cargo" class="entradas" name="cargo" value="{{ usuario.cargo }}" required><br>
+            
+            <label for="area" class="nombres">Area:</label>
+            <input type="text" id="area" class="entradas" name="area" value="{{ usuario.area }}" required><br>
+            
+            <label for="edad" class="nombres">Edad:</label>
+            <input type="text" id="edad" class="entradas" name="edad" value="{{ usuario.edad }}" required><br>
+
+            <label for="password" class="nombres">Contraseña (dejar en blanco para no cambiar):</label>
+            <input type="password" class="entradas" name="password">
+
+            <label for="grupo">Rol:</label>
+            <select name="grupo" class="entradas" id="grupo">
+                <option value="">Seleccionar grupo</option>
+                {% for grupo in grupos %}
+                    <option value="{{ grupo.name }}" {% if grupo in usuario.groups.all %}selected{% endif %}>
+                    {{ grupo.name }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <label for="foto" class="nombres">Foto (dejar en blanco para no cambiar):</label>
+            <input type="file" id="foto" class="entradas" name="foto" accept="image/*"><br>
+
+            <br>
+            <button type="submit" class="register-button"><i class="fas fa-sync-alt"></i> Actualizar</button>
+        </form>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Administrador</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/admin_dashboard.css' %}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+</head>
+<body>
+    <!-- Menú lateral -->
+    <div class="sidebar">
+        <br>
+        <!-- Logo en forma circular -->
+        <div class="logo-container">
+            <img src="{% static 'img/logo_acortado.png' %}" alt="Logo de la Empresa" class="logo">
+            <p class="role">{{ user.nombre }} </p>
+            
+        </div>
+        <br>
+        <div class="menu-container">
+            <!-- Enlaces del menú -->
+            <a href="{% url 'admin_dashboard' %}"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+            <a href="{% url 'ventas' %}"><i class="fas fa-boxes"></i> Ventas</a>
+            <a href="{% url 'usuarios' %}"><i class="fas fa-users"></i> Usuarios</a>
+            <a href="{% url 'productos' %}"><i class="fas fa-cube"></i> Productos</a>
+            <a href="{% url 'clientes' %}" class="no-hover"><i class="fas fa-user-tie"></i> Clientes</a>
+            <a href="{% url 'proveedores' %}"><i class="fas fa-truck"></i> Proveedores</a>
+            <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+        </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="content">
+
+        <div class="content-header">
+            <h1>Bienvenido {{ user.nombre }} !</h1>
+            <p>Graficos generales en vista de administrador.</p>
+        </div>
+    
+        <div class="contenedor-graficos">
+            <!-- Gráfico de Productos por Categoría -->
+            <div class="contenedor-individual">
+                <h2>Productos por Categoría</h2>
+                <canvas id="graficoProductosPorCategoria" class="grafico"></canvas>
+            </div>
+    
+            <!-- Gráfico de Cantidad de Productos por Almacén -->
+            <div class="contenedor-individual">
+                <h2>Cantidad de Productos por Almacén</h2>
+                <canvas id="graficoInventarioPorAlmacen" class="grafico"></canvas>
+            </div>
+        
+            <!-- Gráfico de Ventas 
+            <div class="contenedor-individual">
+                <h2>Ventas por Mes</h2>
+                <canvas id="graficoVentas" class="grafico"></canvas>
+            </div>-->
+        </div>
+
+    
+    </div>
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,395 @@
+/* Estilos generales */
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #333;
+    display: flex;
+}
+
+
+/* Sidebar */
+
+.sidebar {
+    width: 240px;
+    height: 100vh;
+    background-color: #2C3E50;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    padding: 20px 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+}
+
+.back-icon {
+    top: 20px;
+    left: 20px;
+    font-size: 20px;
+    color: #F88C0E;
+    /* Color naranja de la paleta */
+    text-decoration: none;
+    z-index: 10;
+}
+
+.back-icon:hover {
+    color: #003D6B;
+    /* Azul oscuro de la paleta */
+}
+
+
+/* Logo circular */
+
+.logo-container {
+    text-align: center;
+}
+
+.logo-container .logo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.role {
+    font-size: 14px;
+    color: #ffffff;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+
+/* Enlaces del menú */
+
+.sidebar a {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 180px;
+    padding: 10px;
+    margin: 10px 0;
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.sidebar a i {
+    margin-right: 10px;
+}
+
+.sidebar a:hover:not(:nth-child(5)) {
+    background-color: #F88C0E;
+    /* Color anaranjado en hover */
+    color: #fff;
+    /* Texto blanco */
+}
+
+
+/* Estilos para el enlace de "Clientes" */
+
+
+/*.sidebar a:nth-child(5):hover {
+    Sin color de fondo en hover
+    color: #ffffff;
+    Texto blanco
+}*/
+
+.sidebar a:hover {
+    background-color: #F88C0E;
+    color: #fff;
+}
+
+.sidebar a:active {
+    background-color: #007BFF;
+    color: #fff;
+}
+
+
+/* Contenido Principal */
+
+.content {
+    margin-left: 240px;
+    padding: 40px;
+    background-color: #fffefe;
+    min-height: 0.5vh;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+
+/* Barra de búsqueda */
+
+.search-container {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.search-box {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    width: 250px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.search-box:focus {
+    border-color: #333;
+}
+
+.search-button {
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+    margin-left: -40px;
+    color: #333;
+    outline: none;
+}
+
+
+/* Contenedor de la tabla */
+
+.table-container {
+    width: 99.5%;
+    max-height: 327px;
+    /* Ajusta esta altura para limitar cuántas filas mostrar */
+    overflow-y: scroll;
+    /* Agrega scroll vertical */
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    /* Agrega borde para delimitar el contenedor */
+}
+
+
+/* Estilos para la tabla */
+
+.client-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.client-table th,
+.client-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.client-table th {
+    background-color: #F88C0E;
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+    /* Ubica el encabezado en la parte superior del contenedor */
+    z-index: 10;
+    color: #fff;
+}
+
+.client-table tr:hover {
+    background-color: #f0f0f0;
+}
+
+
+/* Personaliza la barra de desplazamiento (opcional) */
+
+.table-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 4px;
+}
+
+
+/* Botones de acción */
+
+.icon-button {
+    text-decoration: none;
+    margin-right: 10px;
+    color: #333;
+    transition: color 0.3s;
+}
+
+.icon-button:hover {
+    color: #007BFF;
+}
+
+.delete:hover {
+    color: #dc3545;
+}
+
+
+/* Botón de registrar nuevo proveedor */
+
+.register-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.register-button {
+    background-color: #F88C0E;
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.register-button:hover {
+    background-color: #0056b3;
+}
+
+h1 {
+    color: #F88C0E;
+}
+
+button.register-button {
+    width: auto;
+    /* Ancho automático para el botón */
+    margin-left: auto;
+    /* Centrar horizontalmente */
+    margin-right: auto;
+    /* Centrar horizontalmente */
+}
+
+
+/*GRAFICOS*/
+
+.contenedor-graficos {
+    display: flex;
+    justify-content: space-around;
+    /* Espacio entre los gráficos */
+    align-items: center;
+    margin-top: 20px;
+}
+
+
+/* Estilo para los gráficos */
+
+.grafico {
+    width: 40%;
+    /* Ajustar el tamaño para hacerlo más pequeño */
+    height: 300px;
+    /* Altura de cada gráfico */
+}
+
+
+/* FORMULARIOS */
+
+.content-form {
+    margin-left: 240px;
+    padding: 40px;
+    min-height: 0.5vh;
+    flex-grow: 1;
+    overflow-y: auto;
+    background-color: #ffffff;
+}
+
+.formulario_actualizar {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: auto;
+    padding: 20px;
+}
+
+.nombres {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.entradas {
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.entradas:focus {
+    border-color: #007bff;
+    outline: none;
+    /* Elimina el contorno predeterminado del navegador */
+}
+
+label,
+.entradas {
+    margin-bottom: 10px;
+    /* Espacio entre etiquetas y entradas */
+}
+
+button i {
+    margin-right: 5px;
+    /* Espacio entre el ícono y el texto */
+}
+
+
+/*FOTOS*/
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    /* Espacio entre el título y la imagen */
+}
+
+.header h1 {
+    margin: 0;
+    flex: 1;
+}
+
+.user-photo img {
+    width: 150px;
+    /* Tamaño más grande */
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* Dos columnas de igual ancho */
+    gap: 10px 20px;
+    margin-top: 20px;
+    align-items: center;
+}
+
+.user-details p {
+    margin: 0;
+    text-align: justify;
+    /* Justifica el texto en cada celda */
+}
+
+
+/* Contenedor para título y párrafo que deben permanecer visibles */
+
+.content-header {
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    z-index: 10;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.content-header h1 {
+    color: #F88C0E;
+    margin: 0;
+}
+
+.content-header p {
+    color: #333;
+    margin: 0;
+}

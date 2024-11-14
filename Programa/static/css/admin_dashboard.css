@@ -1,0 +1,43 @@
+/* Estilo básico para un layout con menú lateral */
+
+body {
+    display: flex;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.content {
+    padding: 20px;
+    flex-grow: 1;
+    height: 650px;
+}
+
+.contenedor-graficos {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+
+/* Estilos para cada contenedor individual */
+
+.contenedor-individual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+    margin-top: 20px;
+    height: 400px;
+    /* Asegura que el contenedor tenga suficiente altura */
+}
+
+
+/* Estilos para los gráficos */
+
+.grafico {
+    width: 80%;
+    height: 80%;
+    /* Utiliza el 100% de la altura del contenedor */
+}

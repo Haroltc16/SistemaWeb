@@ -1,0 +1,351 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+/* Fondo del cuerpo con degradado gris claro */
+
+body {
+    background-color: #F5F5F5;
+    background: linear-gradient(to right, #a55b06, #2e2d2d);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+
+/* Contenedor principal */
+
+.container {
+    background-color: #FFFFFF;
+    /* Blanco */
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    position: relative;
+    overflow: hidden;
+    width: 768px;
+    max-width: 100%;
+    min-height: 480px;
+}
+
+.container p {
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0.3px;
+    margin: 20px 0;
+    color: #ffffff;
+    /* Texto en plomo */
+}
+
+.container span {
+    font-size: 12px;
+    color: #4A4A4A;
+    /* Texto en plomo */
+}
+
+
+/* Enlaces */
+
+.container a {
+    color: #333;
+    /* Texto en gris oscuro/plomo */
+    font-size: 13px;
+    text-decoration: none;
+    margin: 15px 0 10px;
+}
+
+
+/* Botones */
+
+.container button {
+    background-color: #F88C0E;
+    /* Naranja para los botones */
+    color: #FFFFFF;
+    /* Texto blanco */
+    font-size: 12px;
+    padding: 10px 45px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+
+/* Botones ocultos */
+
+.container button.hidden {
+    background-color: transparent;
+    border-color: #FFFFFF;
+}
+
+
+/* Formularios */
+
+.container form {
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 40px;
+    height: 100%;
+}
+
+
+/* Campos de entrada */
+
+.container input {
+    background-color: #EEEEEE;
+    /* Gris claro */
+    border: none;
+    margin: 8px 0;
+    padding: 10px 15px;
+    font-size: 13px;
+    border-radius: 8px;
+    width: 100%;
+    outline: none;
+}
+
+
+/* Contenedor de formularios */
+
+.form-container {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    transition: all 0.6s ease-in-out;
+}
+
+
+/* Formularios de inicio de sesión */
+
+.sign-in {
+    left: 0;
+    width: 50%;
+    z-index: 2;
+}
+
+.container.active .sign-in {
+    transform: translateX(100%);
+}
+
+
+/* Formularios de registro */
+
+.sign-up {
+    left: 0;
+    width: 50%;
+    opacity: 0;
+    z-index: 1;
+}
+
+.container.active .sign-up {
+    transform: translateX(100%);
+    opacity: 1;
+    z-index: 5;
+    animation: move 0.6s;
+}
+
+
+/* Animación para los formularios */
+
+@keyframes move {
+    0%,
+    49.99% {
+        opacity: 0;
+        z-index: 1;
+    }
+    50%,
+    100% {
+        opacity: 1;
+        z-index: 5;
+    }
+}
+
+
+/* Contenedor del toggle */
+
+.toggle-container {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    transition: all 0.6s ease-in-out;
+    border-radius: 150px 0 0 100px;
+    z-index: 1000;
+}
+
+.container.active .toggle-container {
+    transform: translateX(-100%);
+    border-radius: 0 150px 100px 0;
+}
+
+
+/* Botones de cambio de formulario */
+
+.toggle {
+    background-color: #FF6600;
+    /* Naranja */
+    height: 100%;
+    background: linear-gradient(to right, #FF6600, #4A4A4A);
+    /* Naranja a plomo */
+    color: #FFFFFF;
+    /* Texto blanco */
+    position: relative;
+    left: -100%;
+    height: 100%;
+    width: 200%;
+    transform: translateX(0);
+    transition: all 0.6s ease-in-out;
+}
+
+.container.active .toggle {
+    transform: translateX(50%);
+}
+
+
+/* Paneles del toggle */
+
+.toggle-panel {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 30px;
+    text-align: center;
+    top: 0;
+    transform: translateX(0);
+    transition: all 0.6s ease-in-out;
+}
+
+.toggle-left {
+    transform: translateX(-200%);
+}
+
+.container.active .toggle-left {
+    transform: translateX(0);
+}
+
+.toggle-right {
+    right: 0;
+    transform: translateX(0);
+}
+
+.container.active .toggle-right {
+    transform: translateX(200%);
+}
+
+
+/* Efecto hover en botones */
+
+.container button:hover {
+    background-color: #f88b0ebd;
+    /* Naranja más claro al hacer hover */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+
+/* Estilo para el ícono de regresar */
+
+.back-icon {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 24px;
+    color: #F88C0E;
+    /* Color naranja de la paleta */
+    text-decoration: none;
+    z-index: 10;
+}
+
+.back-icon:hover {
+    color: #003D6B;
+    /* Azul oscuro de la paleta */
+}
+
+.logo {
+    max-width: 150px;
+    /* Ajusta el tamaño máximo del logo */
+    margin-bottom: 20px;
+    /* Espacio entre el logo y el título */
+}
+
+.error-message p {
+    color: #FF0000;
+    /* Color rojo para el texto del error */
+    font-size: 14px;
+    /* Tamaño del texto */
+    margin-top: 10px;
+    /* Espacio entre el botón y el mensaje de error */
+}
+
+.modal {
+    display: none;
+    /* Ocultar el modal por defecto */
+    position: fixed;
+    z-index: 1;
+    /* Asegúrate de que el modal esté en frente */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Ancho completo */
+    height: 100%;
+    /* Altura completa */
+    overflow: auto;
+    /* Habilitar desplazamiento si es necesario */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Fondo negro con opacidad */
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto;
+    /* Margen superior y centrado */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    /* Ancho del modal */
+    max-width: 400px;
+    /* Ancho máximo del modal */
+    border-radius: 8px;
+    /* Bordes redondeados */
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.error-message {
+    color: red;
+    /* Color del texto */
+    font-size: 14px;
+    /* Tamaño de la fuente */
+    margin-top: 10px;
+    /* Espaciado superior */
+    text-align: center;
+    /* Centrar el texto */
+}

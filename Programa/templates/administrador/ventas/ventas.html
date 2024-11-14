@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventario</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/tablas.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+
+<body>
+     <!-- Menú lateral -->
+    <div class="sidebar">
+        <br>
+        <!-- Logo en forma circular -->
+        <div class="logo-container">
+            <img src="{% static 'img/logo_acortado.png' %}" alt="Logo de la Empresa" class="logo">
+            <p class="role">{{ user.nombre }} </p>
+            
+        </div>
+        <br>
+        <div class="menu-container">
+            <!-- Enlaces del menú -->
+            <a href="{% url 'admin_dashboard' %}"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+            <a href="{% url 'ventas' %}"><i class="fas fa-boxes"></i> Ventas</a>
+            <a href="{% url 'usuarios' %}"><i class="fas fa-users"></i> Usuarios</a>
+            <a href="{% url 'productos' %}"><i class="fas fa-cube"></i> Productos</a>
+            <a href="{% url 'clientes' %}" class="no-hover"><i class="fas fa-user-tie"></i> Clientes</a>
+            <a href="{% url 'proveedores' %}"><i class="fas fa-truck"></i> Proveedores</a>
+            <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
+        </div>
+    </div>
+    <div class="content">
+
+        <h1>Ventas Recientes</h1>
+        <div class="table-container">
+    
+            <table class="client-table">
+                <tr>
+                    <th>Cliente</th>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Total</th>
+                    <th>Fecha de Venta</th>
+                    <th>Acciones</th>
+                </tr>
+                {% for venta in ventas %}
+                <tr>
+                    <td>{{ venta.cliente }}</td>
+                    <td>{{ venta.producto }}</td>
+                    <td>{{ venta.cantidad }}</td>
+                    <td>{{ venta.total }}</td>  <!-- Muestra el total calculado -->
+                    <td>{{ venta.fecha_venta }}</td>
+                    <td>
+                        <a href="{% url 'eliminar_venta' venta.id %}" class="icon-button delete" onclick="return confirm('¿Estás seguro de que deseas eliminar esta venta?');">
+                            <i class="fas fa-trash-alt"></i>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+
+        </div>
+
+        <div class="register-container">
+            <a href="{% url 'registrar_venta' %}">
+                <button type="submit" class="register-button"><i class="fas fa-user-plus"></i> Registrar Nuevo</button>
+            </a>
+        </div>
+
+        <div class="register-container">
+            <a href="{% url 'ventas_grafico' %}">
+                <button type="submit" class="register-button"><i class="fas fa-user-plus"></i> Ver Grafico</button>
+            </a>
+        </div>
+    </div>
+
+    
+
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
